@@ -1,0 +1,23 @@
+{
+  "name": "@nanoflow/engram",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Engram — hybrid long-term memory for OpenClaw agents. SQLite+FTS5 for structured facts, LanceDB for semantic recall.",
+  "homepage": "https://github.com/NanoFlow-io/engram",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NanoFlow-io/engram.git"
+  },
+  "license": "MIT",
+  "author": "Cipher @ NanoFlow",
+  "keywords": ["openclaw", "memory", "agent", "lancedb", "sqlite", "rag", "embeddings"],
+  "dependencies": {
+    "@lancedb/lancedb": "^0.23.0",
+    "@sinclair/typebox": "0.34.47",
+    "better-sqlite3": "^11.0.0",
+    "openai": "^6.16.0"
+  },
+  "openclaw": {
+    "extensions": ["./src/index.ts"]
+  }
+}

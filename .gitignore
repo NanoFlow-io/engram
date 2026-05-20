@@ -1,0 +1,12 @@
+node_modules/
+*.log
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+.env.local
+.DS_Store
+dist/
+build/
+lancedb/
