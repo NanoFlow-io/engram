@@ -32,6 +32,15 @@
       "help": "Automatically inject relevant memories into context"
     }
   },
+  "contracts": {
+    "tools": [
+      "memory_recall",
+      "memory_store",
+      "memory_forget",
+      "memory_checkpoint",
+      "memory_prune"
+    ]
+  },
   "configSchema": {
     "type": "object",
     "additionalProperties": false,

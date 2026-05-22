@@ -163,6 +163,7 @@ config.plugins.slots.memory = 'engram';
 if (!config.plugins.entries['engram']) {
   config.plugins.entries['engram'] = {
     enabled: true,
+    hooks: { allowConversationAccess: true },
     config: {
       embedding: { apiKey: '\${OPENAI_API_KEY}', model: 'text-embedding-3-small' },
       autoCapture: true,
@@ -171,6 +172,8 @@ if (!config.plugins.entries['engram']) {
   };
 } else {
   config.plugins.entries['engram'].enabled = true;
+  config.plugins.entries['engram'].hooks = config.plugins.entries['engram'].hooks || {};
+  config.plugins.entries['engram'].hooks.allowConversationAccess = true;
 }
 fs.writeFileSync('$CONFIG', JSON.stringify(config, null, 2), 'utf-8');
 "

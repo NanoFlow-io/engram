@@ -80,6 +80,7 @@ Engram is configured under `plugins.entries.engram` in `~/.openclaw/openclaw.jso
     "entries": {
       "engram": {
         "enabled": true,
+        "hooks": { "allowConversationAccess": true },
         "config": {
           "embedding": {
             "apiKey": "${OPENAI_API_KEY}",
@@ -104,6 +105,27 @@ Engram is configured under `plugins.entries.engram` in `~/.openclaw/openclaw.jso
 | `autoRecall` | `false` | inject relevant memories into context. Off by default — can be noisy. |
 | `sqlitePath` | `~/.openclaw/memory/facts.db` | structured store |
 | `lanceDbPath` | `~/.openclaw/memory/lancedb` | vector store |
+
+## 🛠 CLI
+
+Engram registers a `hybrid-mem` CLI command with subcommands:
+
+```bash
+openclaw hybrid-mem stats          # show fact/vector counts
+openclaw hybrid-mem prune          # remove expired memories
+openclaw hybrid-mem checkpoint     # manual checkpoint
+openclaw hybrid-mem backfill-decay # backfill decay classes on legacy data
+openclaw hybrid-mem extract-daily  # extract from daily notes
+openclaw hybrid-mem search <q>     # hybrid search
+openclaw hybrid-mem lookup <key>   # exact lookup
+```
+
+Verify after install:
+
+```bash
+openclaw plugins doctor
+openclaw plugins inspect engram --runtime
+```
 
 ## 🧱 Architecture
 
