@@ -880,8 +880,8 @@ function detectCategory(text: string): MemoryCategory {
 // Plugin Definition
 // ============================================================================
 
-const memoryHybridPlugin = {
-  id: "memory-hybrid",
+const engramPlugin = {
+  id: "engram",
   name: "Memory (Hybrid: SQLite + LanceDB)",
   description:
     "Two-tier memory: SQLite+FTS5 for structured facts, LanceDB for semantic search",
@@ -901,7 +901,7 @@ const memoryHybridPlugin = {
     let pruneTimer: ReturnType<typeof setInterval> | null = null;
 
     api.logger.info(
-      `memory-hybrid: registered (sqlite: ${resolvedSqlitePath}, lance: ${resolvedLancePath})`,
+      `engram: registered (sqlite: ${resolvedSqlitePath}, lance: ${resolvedLancePath})`,
     );
 
     // ========================================================================
@@ -945,7 +945,7 @@ const memoryHybridPlugin = {
             const vector = await embeddings.embed(query);
             lanceResults = await vectorDb.search(vector, limit, 0.3);
           } catch (err) {
-            api.logger.warn(`memory-hybrid: vector search failed: ${err}`);
+            api.logger.warn(`engram: vector search failed: ${err}`);
           }
 
           const results = mergeResults(sqliteResults, lanceResults, limit);
@@ -1074,7 +1074,7 @@ const memoryHybridPlugin = {
               });
             }
           } catch (err) {
-            api.logger.warn(`memory-hybrid: vector store failed: ${err}`);
+            api.logger.warn(`engram: vector store failed: ${err}`);
           }
 
           return {
@@ -1567,7 +1567,7 @@ const memoryHybridPlugin = {
             lanceResults = await vectorDb.search(vector, 3, 0.3);
           } catch (err) {
             api.logger.warn(
-              `memory-hybrid: vector recall failed: ${err}`,
+              `engram: vector recall failed: ${err}`,
             );
           }
 
@@ -1582,14 +1582,14 @@ const memoryHybridPlugin = {
             .join("\n");
 
           api.logger.info?.(
-            `memory-hybrid: injecting ${results.length} memories (sqlite: ${ftsResults.length}, lance: ${lanceResults.length})`,
+            `engram: injecting ${results.length} memories (sqlite: ${ftsResults.length}, lance: ${lanceResults.length})`,
           );
 
           return {
             prependContext: `<relevant-memories>\nThe following memories may be relevant:\n${memoryContext}\n</relevant-memories>`,
           };
         } catch (err) {
-          api.logger.warn(`memory-hybrid: recall failed: ${String(err)}`);
+          api.logger.warn(`engram: recall failed: ${String(err)}`);
         }
       });
     }
@@ -1658,7 +1658,7 @@ const memoryHybridPlugin = {
               }
             } catch (err) {
               api.logger.warn(
-                `memory-hybrid: vector capture failed: ${err}`,
+                `engram: vector capture failed: ${err}`,
               );
             }
 
@@ -1667,11 +1667,11 @@ const memoryHybridPlugin = {
 
           if (stored > 0) {
             api.logger.info(
-              `memory-hybrid: auto-captured ${stored} memories`,
+              `engram: auto-captured ${stored} memories`,
             );
           }
         } catch (err) {
-          api.logger.warn(`memory-hybrid: capture failed: ${String(err)}`);
+          api.logger.warn(`engram: capture failed: ${String(err)}`);
         }
       });
     }
@@ -1681,17 +1681,17 @@ const memoryHybridPlugin = {
     // ========================================================================
 
     api.registerService({
-      id: "memory-hybrid",
+      id: "engram",
       start: () => {
         const sqlCount = factsDb.count();
         const expired = factsDb.countExpired();
         api.logger.info(
-          `memory-hybrid: initialized (sqlite: ${sqlCount} facts, lance: ${resolvedLancePath}, model: ${cfg.embedding.model})`,
+          `engram: initialized (sqlite: ${sqlCount} facts, lance: ${resolvedLancePath}, model: ${cfg.embedding.model})`,
         );
 
         if (expired > 0) {
           const pruned = factsDb.pruneExpired();
-          api.logger.info(`memory-hybrid: startup prune removed ${pruned} expired facts`);
+          api.logger.info(`engram: startup prune removed ${pruned} expired facts`);
         }
 
         pruneTimer = setInterval(() => {
@@ -1700,21 +1700,21 @@ const memoryHybridPlugin = {
             const softPruned = factsDb.decayConfidence();
             if (hardPruned > 0 || softPruned > 0) {
               api.logger.info(
-                `memory-hybrid: periodic prune — ${hardPruned} expired, ${softPruned} decayed`,
+                `engram: periodic prune — ${hardPruned} expired, ${softPruned} decayed`,
               );
             }
           } catch (err) {
-            api.logger.warn(`memory-hybrid: periodic prune failed: ${err}`);
+            api.logger.warn(`engram: periodic prune failed: ${err}`);
           }
         }, 60 * 60_000);
       },
       stop: () => {
         if (pruneTimer) clearInterval(pruneTimer);
         factsDb.close();
-        api.logger.info("memory-hybrid: stopped");
+        api.logger.info("engram: stopped");
       },
     });
   },
 };
 
-export default memoryHybridPlugin;
+export default engramPlugin;

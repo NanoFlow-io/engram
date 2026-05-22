@@ -1,7 +1,7 @@
 /**
- * seed-hybrid.mjs — Import existing memory files into memory-hybrid plugin
+ * seed-engram.mjs — Import existing memory files into engram plugin
  *
- * Usage:  cd ~/.openclaw && node seed-hybrid.mjs
+ * Usage:  cd ~/.openclaw && node seed-engram.mjs
  *
  * Reads:
  *   - ~/.openclaw/workspace/MEMORY.md (main memory file)
@@ -47,7 +47,7 @@ function getApiKey() {
   if (existsSync(CONFIG_PATH)) {
     const config = JSON.parse(readFileSync(CONFIG_PATH, "utf-8"));
     const entries = config?.plugins?.entries || {};
-    const hybrid = entries["memory-hybrid"];
+    const hybrid = entries["engram"];
     if (hybrid?.config?.embedding?.apiKey) {
       const key = hybrid.config.embedding.apiKey;
       if (key.startsWith("sk-")) return key;

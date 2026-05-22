@@ -180,7 +180,7 @@ log_ok "Config updated, memory slot = engram"
 # Step 6 — Seed script + memory dir
 # ─────────────────────────────────────────────────────────────────────
 log_step 6 6 "Finishing up"
-cp "$TMP_DIR/engram/scripts/seed-hybrid.mjs" "$HOME/.openclaw/seed-engram.mjs"
+cp "$TMP_DIR/engram/scripts/seed-engram.mjs" "$HOME/.openclaw/seed-engram.mjs"
 mkdir -p "$HOME/.openclaw/memory"
 log_ok "Seed script → ~/.openclaw/seed-engram.mjs"
 log_ok "Memory dir → ~/.openclaw/memory"

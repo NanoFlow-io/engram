@@ -66,7 +66,7 @@ function resolveEnvVars(value: string): string {
 export const hybridConfigSchema = {
   parse(value: unknown): HybridMemoryConfig {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
-      throw new Error("memory-hybrid config required");
+      throw new Error("engram config required");
     }
     const cfg = value as Record<string, unknown>;
 
