@@ -1336,7 +1336,7 @@ const engramPlugin = {
     api.registerCli(
       ({ program }) => {
         const mem = program
-          .command("hybrid-mem")
+          .command("engram")
           .description("Hybrid memory plugin commands");
 
         mem
@@ -1547,7 +1547,7 @@ const engramPlugin = {
             console.log(JSON.stringify(output, null, 2));
           });
       },
-      { commands: ["hybrid-mem", "hybrid-mem stats", "hybrid-mem prune", "hybrid-mem checkpoint", "hybrid-mem backfill-decay", "hybrid-mem extract-daily", "hybrid-mem search", "hybrid-mem lookup"] },
+      { commands: ["engram", "engram stats", "engram prune", "engram checkpoint", "engram backfill-decay", "engram extract-daily", "engram search", "engram lookup"] },
     );
 
     // ========================================================================

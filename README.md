@@ -108,16 +108,16 @@ Engram is configured under `plugins.entries.engram` in `~/.openclaw/openclaw.jso
 
 ## 🛠 CLI
 
-Engram registers a `hybrid-mem` CLI command with subcommands:
+Engram registers a `engram` CLI command with subcommands:
 
 ```bash
-openclaw hybrid-mem stats          # show fact/vector counts
-openclaw hybrid-mem prune          # remove expired memories
-openclaw hybrid-mem checkpoint     # manual checkpoint
-openclaw hybrid-mem backfill-decay # backfill decay classes on legacy data
-openclaw hybrid-mem extract-daily  # extract from daily notes
-openclaw hybrid-mem search <q>     # hybrid search
-openclaw hybrid-mem lookup <key>   # exact lookup
+openclaw engram stats          # show fact/vector counts
+openclaw engram prune          # remove expired memories
+openclaw engram checkpoint     # manual checkpoint
+openclaw engram backfill-decay # backfill decay classes on legacy data
+openclaw engram extract-daily  # extract from daily notes
+openclaw engram search <q>     # hybrid search
+openclaw engram lookup <key>   # exact lookup
 ```
 
 Verify after install:

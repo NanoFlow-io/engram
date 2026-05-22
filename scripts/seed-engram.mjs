@@ -553,7 +553,7 @@ async function main() {
   for (const row of decayBreakdown) console.log(`  ${row.decay_class.padEnd(12)} ${row.cnt}`);
 
   db.close();
-  console.log("\nDone! Run `openclaw hybrid-mem stats` to verify.");
+  console.log("\nDone! Run `openclaw engram stats` to verify.");
 }
 
 main().catch((err) => {
